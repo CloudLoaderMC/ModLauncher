@@ -1,8 +1,10 @@
+import ml.darubyminer360.gradleutils.GradleUtils
+
 plugins {
     id 'java-library'
     id 'eclipse'
     id 'com.github.ben-manes.versions' version '0.39.0'
-    id 'net.minecraftforge.gradleutils' version '2.+'
+    id 'ml.darubyminer360.gradleutils' version '2.2.0'
     id 'de.jjohannes.extra-java-module-info' version '0.11'
     id 'maven-publish'
 }
@@ -26,7 +28,7 @@ dependencyUpdates {
 
 ext.asmVersion = 9.3
 
-group = 'cpw.mods'
+group = 'ml.cloudmc'
 version = gradleutils.getTagOffsetVersion()
 logger.lifecycle('Version: ' + version)
 
@@ -37,6 +39,10 @@ sourceSets {
 
 repositories {
     mavenLocal()
+    maven {
+        name = 'Cloud'
+        url = 'https://maven.cloudmc.ml/releases/'
+    }
     maven {
         name = 'forge'
         url = 'https://maven.minecraftforge.net/'
@@ -184,27 +190,27 @@ publishing {
             pom {
                 name = 'Mod Launcher'
                 description = 'Common ModLauncher framework'
-                url = 'https://github.com/McModLauncher/modlauncher'
+                url = 'https://github.com/CloudLoaderMC/ModLauncher'
                 scm {
-                    url = 'https://github.com/McModLauncher/modlauncher'
-                    connection = 'scm:git:git://github.com/McModLauncher/modlauncher.git'
-                    developerConnection = 'scm:git:git@github.com:McModLauncher/modlauncher.git'
+                    url = 'https://github.com/CloudLoaderMC/ModLauncher'
+                    connection = 'scm:git:git://github.com/CloudLoaderMC/ModLauncher.git'
+                    developerConnection = 'scm:git:git@github.com:CloudLoaderMC/ModLauncher.git'
                 }
                 issueManagement {
                     system = 'github'
-                    url = 'https://github.com/McModLauncher/modlauncher/issues'
+                    url = 'https://github.com/CloudLoaderMC/ModLauncher/issues'
                 }
 
                 developers {
                     developer {
-                        id = 'cpw'
-                        name = 'cpw'
+                        id = 'DaRubyMiner360'
+                        name = 'DaRubyMiner360'
                     }
                 }
             }
         }
     }
     repositories {
-        maven gradleutils.getPublishingForgeMaven()
+        maven GradleUtils.getPublishingCloudMaven(project)
     }
 }
