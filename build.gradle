@@ -1,9 +1,11 @@
 import java.text.SimpleDateFormat
+import ml.darubyminer360.gradleutils.GradleUtils
 
 plugins {
     id 'org.ajoberstar.grgit' version '4.0.2'
     id 'com.github.ben-manes.versions' version '0.27.0'
     id 'me.champeau.gradle.jmh' version '0.5.0-rc-1'
+    id 'ml.darubyminer360.gradleutils' version '2.2.0'
 }
 apply plugin: 'java-library'
 apply plugin: 'maven-publish'
@@ -12,6 +14,10 @@ apply plugin: 'jacoco'
 
 repositories {
     mavenCentral()
+    maven {
+        name = 'Cloud'
+        url = 'https://maven.cloudmc.ml/releases/'
+    }
     maven {
         name = 'forge'
         url = 'https://files.minecraftforge.net/maven/'
@@ -43,13 +49,15 @@ jacoco {
     toolVersion = '0.8.2'
 }
 
-group = 'cpw.mods'
+group = 'ml.cloudmc'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 ext.asmVersion = 7.2
 
-version = grgit.describe(longDescr: true).split('-').with { "${it[0]}.${it[1]}" }
+// Shouldn't ever have another version in legacy, so this doesn't matter too much
+//version = grgit.describe(longDescr: true).split('-').with { "${it[0]}.${it[1]}" }
+version = "7.0.1"
 
 dependencies {
     implementation('com.google.code.findbugs:jsr305:3.0.2')
@@ -164,33 +172,27 @@ publishing {
             pom {
                 name = 'Mod Launcher'
                 description = 'Common ModLauncher framework'
-                url = 'https://github.com/cpw/modlauncher'
+                url = 'https://github.com/CloudLoaderMC/ModLauncher'
                 scm {
-                    url = 'https://github.com/cpw/modlauncher'
-                    connection = 'scm:git:git://github.com/cpw/modlauncher.git'
-                    developerConnection = 'scm:git:git@github.com:cpw/modlauncher.git'
+                    url = 'https://github.com/CloudLoaderMC/ModLauncher'
+                    connection = 'scm:git:git://github.com/CloudLoaderMC/ModLauncher.git'
+                    developerConnection = 'scm:git:git@github.com:CloudLoaderMC/ModLauncher.git'
                 }
                 issueManagement {
                     system = 'github'
-                    url = 'https://github.com/cpw/modlauncher/issues'
+                    url = 'https://github.com/CloudLoaderMC/ModLauncher/issues'
                 }
 
                 developers {
                     developer {
-                        id = 'cpw'
-                        name = 'cpw'
+                        id = 'DaRubyMiner360'
+                        name = 'DaRubyMiner360'
                     }
                 }
             }
         }
     }
     repositories {
-        maven {
-            credentials {
-                username project.properties.forgeMavenUser?:'fake'
-                password project.properties.forgeMavenPassword?:'news'
-            }
-            url 'http://files.minecraftforge.net/maven/manage/upload'
-        }
+        maven GradleUtils.getPublishingCloudMaven(project)
     }
 }
