@@ -45,9 +45,9 @@ class TransformationServicesHandler {
     }
 
     List<ITransformationService.Resource> initializeTransformationServices(ArgumentHandler argumentHandler, Environment environment, final NameMappingServiceHandler nameMappingServiceHandler) {
-        loadTransformationServices(environment);
-        validateTransformationServices();
         processArguments(argumentHandler, environment);
+        loadTransformationServices(argumentHandler, environment);
+        validateTransformationServices();
         initialiseTransformationServices(environment);
         // force the naming to "mojang" if nothing has been populated during transformer setup
         environment.computePropertyIfAbsent(IEnvironment.Keys.NAMING.get(), a-> "mojang");
@@ -111,9 +111,9 @@ class TransformationServicesHandler {
         }
     }
 
-    private void loadTransformationServices(Environment environment) {
+    private void loadTransformationServices(ArgumentHandler argumentHandler, Environment environment) {
         LOGGER.debug(MODLAUNCHER,"Transformation services loading");
-        serviceLookup.values().forEach(s -> s.onLoad(environment, serviceLookup.keySet()));
+        serviceLookup.values().forEach(s -> s.onLoad(argumentHandler, environment, serviceLookup.keySet()));
     }
 
     void discoverServices(final ArgumentHandler.DiscoveryData discoveryData) {
