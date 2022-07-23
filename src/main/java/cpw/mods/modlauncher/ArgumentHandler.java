@@ -75,7 +75,7 @@ public class ArgumentHandler {
         return this.optionSet.valuesOf(minecraftJarOption).toArray(new Path[0]);
     }
 
-    String getLaunchTarget() {
+    public String getLaunchTarget() {
         return this.optionSet.valueOf(launchTarget);
     }
 
