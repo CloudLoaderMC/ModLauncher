@@ -18,6 +18,7 @@
 
 package cpw.mods.modlauncher.test;
 
+import cpw.mods.modlauncher.ArgumentHandler;
 import cpw.mods.modlauncher.api.*;
 import joptsimple.*;
 import org.jetbrains.annotations.NotNull;
@@ -64,7 +65,7 @@ public class MockTransformerService implements ITransformationService {
     }
 
     @Override
-    public void onLoad(IEnvironment env, Set<String> otherServices) throws IncompatibleEnvironmentException {
+    public void onLoad(ArgumentHandler argumentHandler, IEnvironment env, Set<String> otherServices) throws IncompatibleEnvironmentException {
 
     }
 

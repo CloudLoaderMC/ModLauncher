@@ -47,10 +47,10 @@ public class TransformationServiceDecorator {
         this.service = service;
     }
 
-    void onLoad(IEnvironment env, Set<String> otherServices) {
+    void onLoad(ArgumentHandler argumentHandler, IEnvironment env, Set<String> otherServices) {
         try {
             LOGGER.debug(MODLAUNCHER,"Loading service {}", this.service::name);
-            this.service.onLoad(env, otherServices);
+            this.service.onLoad(argumentHandler, env, otherServices);
             this.isValid = true;
             LOGGER.debug(MODLAUNCHER,"Loaded service {}", this.service::name);
         } catch (IncompatibleEnvironmentException e) {

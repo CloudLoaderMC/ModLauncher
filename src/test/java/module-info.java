@@ -5,6 +5,9 @@ module cpw.mods.modlauncher.testing {
     requires cpw.mods.modlauncher.testjars;
     requires powermock.reflect;
     requires cpw.mods.modlauncher;
+    requires jopt.simple;
+    requires annotations;
+    requires org.objectweb.asm.tree;
     uses cpw.mods.modlauncher.api.ILaunchHandlerService;
     uses cpw.mods.modlauncher.api.INameMappingService;
     uses cpw.mods.modlauncher.api.ITransformationService;

@@ -18,6 +18,7 @@
 
 package cpw.mods.modlauncher.api;
 
+import cpw.mods.modlauncher.ArgumentHandler;
 import joptsimple.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -81,15 +82,16 @@ public interface ITransformationService {
      *
      * @param env           environment - query state from here
      * @param otherServices other services loaded with the system
+     *                      * @param otherServices    other services loaded with the system
      * @throws IncompatibleEnvironmentException if there is an incompatibility detected. Identify specifics in
      *                                          the exception message
      */
-    void onLoad(IEnvironment env, Set<String> otherServices) throws IncompatibleEnvironmentException;
+    void onLoad(ArgumentHandler argumentHandler, IEnvironment env, Set<String> otherServices) throws IncompatibleEnvironmentException;
 
     /**
      * The {@link ITransformer} is the fundamental operator of the system.
      *
-     * @return A list of transformers for your ITransformationService. This is called after {@link #onLoad(IEnvironment, Set)}
+     * @return A list of transformers for your ITransformationService. This is called after {@link #onLoad(ArgumentHandler, IEnvironment, Set)}
      * and {@link #initialize(IEnvironment)}, so you can return an appropriate Transformer set for the environment
      * you find yourself in.
      */
