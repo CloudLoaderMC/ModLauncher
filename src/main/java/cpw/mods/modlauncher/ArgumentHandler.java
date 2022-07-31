@@ -112,6 +112,10 @@ public class ArgumentHandler {
         return args.toArray(new String[0]);
     }
 
+    public OptionSet getOptionSet() {
+        return this.optionSet;
+    }
+
     private void addOptionToString(OptionSpec<?> option, OptionSet optionSet, List<String> appendTo) {
         if (optionSet.has(option)) {
             appendTo.add("--"+option.options().get(0));
