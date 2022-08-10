@@ -40,7 +40,6 @@ sourceSets {
 repositories {
     mavenLocal()
     mavenCentral()
-    gradlePluginPortal()
     maven {
         name = 'Cloud'
         url = 'https://maven.cloudmc.ml/releases/'
@@ -57,7 +56,7 @@ dependencies {
     api("org.ow2.asm:asm-tree:${asmVersion}")
     api("org.ow2.asm:asm-commons:${asmVersion}")
     
-    implementation('cpw.mods:securejarhandler:2.1.2')
+    implementation('ml.cloudmc:SecureJarHandler:2.1.5')
     implementation('org.apache.logging.log4j:log4j-api:2.17.1')
     implementation('org.apache.logging.log4j:log4j-core:2.17.1')
     implementation('net.sf.jopt-simple:jopt-simple:5.0.4')
